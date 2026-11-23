@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chúc Mừng Sinh Nhật Người Yêu ❤️</title>
+  <style>
+    @import url('https://googleapis.com');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #ffecd2 100%);
+      font-family: 'Quicksand', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    .heart-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .floating-heart {
+      position: absolute;
+      color: rgba(255, 71, 87, 0.4);
+      animation: floatUp 6s linear infinite;
+      bottom: -50px;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(0.8); opacity: 0; }
+      50% { opacity: 0.8; }
+      100% { transform: translateY(-110vh) scale(1.3); opacity: 0; }
+    }
+
+    .card-container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 450px;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 25px;
+      padding: 35px 25px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(255, 71, 87, 0.25);
+      border: 2px solid #fff;
+      transition: all 0.5s ease;
+    }
+
+    #gift-screen {
+      cursor: pointer;
+      padding: 30px 10px;
+    }
+
+    .gift-box {
+      font-size: 90px;
+      display: inline-block;
+      animation: bounce 1.5s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-12px) rotate(-5deg); }
+      75% { transform: translateY(-12px) rotate(5deg); }
+    }
+
+    .tap-hint {
+      margin-top: 15px;
+      font-size: 1.1em;
+      color: #ff4757;
+      font-weight: 600;
+    }
+
+    #card-content {
+      display: none;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.8em;
+      color: #ff4757;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 1.1em;
+      color: #747d8c;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .message-box {
+      background: #fff5f6;
+      border-radius: 15px;
+      padding: 20px;
+      border: 1px dashed #ff6b81;
+      color: #2f3542;
+      font-size: 1.05em;
+      line-height: 1.7;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .signature {
+      text-align: right;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6em;
+      color: #ff4757;
+      margin-top: 10px;
+    }
+
+    .love-btn {
+      background: linear-gradient(45deg, #ff4757, #ff6b81);
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(255, 71, 87, 0.3);
+      transition: transform 0.2s;
+    }
+
+    .love-btn:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="heart-bg" id="heartBg"></div>
+
+  <div class="card-container">
+ 
+    <div id="gift-screen" onclick="openCard()">
+      <div class="gift-box">🎁</div>
+      <div class="tap-hint">Chạm vào hộp quà để mở lời chúc nhé! ❤️</div>
+    </div>
+
+    <div id="card-content">
+      <h1>Happy Birthday!</h1>
+
+      <div class="subtitle">Gửi công chúa của anh : <strong>Quyên</strong> 🎂</div>
+
+      <div class="message-box">
+
+        <p>Chúc mừng sinh nhật người đặc biệt nhất trong cuộc đời anh! 💖</p>
+        <br>
+        <p>Cảm ơn em đã luôn ở bên cạnh, mang lại tiếng cười và sự ấm áp mỗi ngày. Chúc tuổi mới của em luôn ngập tràn niềm vui, rạng rỡ, bình an và mọi ước mơ đều trở thành hiện thực.</p>
+        <br>
+        <p>Dù có chuyện gì xảy ra, anh vẫn sẽ luôn ở đây, nắm tay và đồng hành cùng em trên mọi chặng đường. Yêu em rất nhiều! ✨</p>
+
+        <div class="signature">Thương yêu ❤️</div>
+      </div>
+
+      <button class="love-btn" onclick="createHeartExplosion()">Thả thêm tim 💖</button>
+    </div>
+  </div>
+
+  <script>
+
+    const heartBg = document.getElementById('heartBg');
+    function spawnHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('floating-heart');
+      heart.innerHTML = ['❤️', '💖', '💕', '🌸'][Math.floor(Math.random() * 4)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+      heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+      heartBg.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+    setInterval(spawnHeart, 400);
+
+    function openCard() {
+      document.getElementById('gift-screen').style.display = 'none';
+      document.getElementById('card-content').style.display = 'block';
+      createHeartExplosion();
+    }
+
+    function createHeartExplosion() {
+      for (let i = 0; i < 25; i++) {
+        setTimeout(spawnHeart, i * 60);
+      }
+    }
+  </script>
+</body>
+</html>
